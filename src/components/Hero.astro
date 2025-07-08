@@ -1,0 +1,66 @@
+---
+import { baseUrl } from '@/utils/functions';
+const srcBall = baseUrl('/assets/socker-ball.png');
+---
+
+<section>
+  <img src={srcBall} alt='Ball Logo' class='ball' />
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import CustomBounce from 'gsap/CustomBounce';
+  import CustomEase from 'gsap/CustomEase';
+
+  gsap.registerPlugin(CustomEase, CustomBounce);
+  CustomBounce.create('myBounce', { strength: 0.5 });
+
+  const tl = gsap.timeline({
+    defaults: {
+      onUpdate: updateUi
+    }
+  });
+
+  tl.to('.ball', {
+    delay: 1,
+    duration: 1.5,
+    y:  window.innerHeight - 66,
+    ease: 'myBounce',
+    opacity: 1
+  });
+
+  function updateUi() {}
+</script>
+
+<style>
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    height: 100vh;
+    overflow: hidden;
+    background: #95483f;
+    background-image: linear-gradient(
+      90deg,
+      #000004,
+      #160b39,
+      #420a68,
+      #6a176e,
+      #932667,
+      #ba3655,
+      #dd513a,
+      #f3761b,
+      #fca50a,
+      #f6d746,
+      #f6d746
+    );
+  }
+
+  .ball {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateY(-100%);
+  }
+</style>
